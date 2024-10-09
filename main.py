@@ -6,8 +6,3 @@ from services.editoras_services import cadastrar_editora, listar_editoras
 from services.categorias_services import cadastrar_categoria, listar_categorias
 from services.clientes_services import cadastrar_cliente, listar_clientes
 from services.livros_services import cadastrar_livro, listar_livros
-
-
-
-
-listar_livros()
