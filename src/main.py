@@ -1,10 +1,21 @@
 from services import *
+from services.criar_tabelas import criar_tabelas
+from services.verificador import verificar_funcionario
+
+criar_tabelas()
 
 try:
-    while True:
-        funcionario = login_page()
-        if funcionario is not None:
-            break
+    if verificar_funcionario():
+        while True:
+            funcionario = login_page()
+            if funcionario is not None:
+                break
+    else:
+        cadastrar_funcionario()
+        while True:
+            funcionario = login_page()
+            if funcionario is not None:
+                break
 
     inicial_page(funcionario)
 

@@ -2,6 +2,7 @@ from services import *
 import time
 import os
 from services.database import criar_conexao
+from services.verificador import *
 
 def cadastrar_cliente():
     conn = criar_conexao()

@@ -2,6 +2,7 @@ from services import *
 import time
 import os
 from services.database import criar_conexao
+from services.verificador import *
 
 def cadastrar_funcionario():
     conn = criar_conexao()
@@ -12,17 +13,20 @@ def cadastrar_funcionario():
     try:
         while True:
             os.system("cls")
+            print("Cadastrar Funcionario")
             nome = input("Digite o nome: ").strip()
             if validar_nome(nome):
                 break
         
         while True:
             os.system("cls")
+            print("Cadastrar Funcionario")
             email = input("Digite o email: ").strip()
             if validar_email(email):
                 break
         
         os.system("cls")
+        print("Cadastrar Funcionario")
         senha = input("Digite a senha: ")
 
         cursor = conn.cursor()
