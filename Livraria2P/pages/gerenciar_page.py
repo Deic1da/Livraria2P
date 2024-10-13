@@ -11,7 +11,7 @@ def gerenciar():
             print("\033[92m1 - Cadastrar Livro\033[0m")
             print("\033[92m2 - Cadastrar Cliente\033[0m")
             print("\033[92m3 - Cadastrar Funcionario\033[0m")
-            print("\033[91m0 - Sair\033[0m\n")
+            print("\033[91m0 - Voltar\033[0m\n")
             
             escolha = int(input("Digite sua escolha: "))
 

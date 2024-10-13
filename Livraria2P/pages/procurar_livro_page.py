@@ -1,24 +1,18 @@
 import os
 import time
 from services.pedidos_services import vender_livro
-from services.livros_services import (
-    listar_autores,
-    listar_categorias,
-    listar_editoras,
-    listar_livros,
-    listar_livros_personalisado,
-)
+from services.livros_services import listar_autores,listar_categorias,listar_editoras,listar_livros,listar_livros_personalisado
 
 def procurar_livro(funcionario):
     while True:
         try:
             os.system("cls")
-            print("\033[96mProcurar Livro\033[0m")  # Título em ciano
-            print("\033[92m1 - Todos os Livros\033[0m")  # Opção em verde
-            print("\033[92m2 - Por Autor\033[0m")  # Opção em verde
-            print("\033[92m3 - Por Categoria\033[0m")  # Opção em verde
-            print("\033[92m4 - Por Editora\033[0m")  # Opção em verde
-            print("\033[92m0 - Sair\033[0m\n")  # Opção em verde
+            print("\033[96mProcurar Livro\033[0m")
+            print("\033[92m1 - Todos os Livros\033[0m")
+            print("\033[92m2 - Por Autor\033[0m")
+            print("\033[92m3 - Por Categoria\033[0m")
+            print("\033[92m4 - Por Editora\033[0m")
+            print("\033[92m0 - Voltar\033[0m\n")
 
             escolha = int(input("Digite sua escolha: "))
 
@@ -64,8 +58,8 @@ def procurar_livro(funcionario):
                     vender_livro(produto, funcionario)
 
             else:
-                print("\033[91mErro: Digite um número entre 0 e 4!\033[0m")  # Erro em vermelho
+                print("\033[91mErro: Digite um número entre 0 e 4!\033[0m")
                 time.sleep(2)
         except ValueError:
-            print("\033[91mErro: Entrada inválida! Por favor, digite um número.\033[0m")  # Erro em vermelho
+            print("\033[91mErro: Entrada inválida! Por favor, digite um número.\033[0m")
             time.sleep(2)

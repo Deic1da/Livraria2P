@@ -31,9 +31,12 @@ def listar_autores():
         autores = cursor.fetchall()
         
         if autores:
-            print("Autores cadastrados:")
+            print("\033[96mAutores cadastrados:\033[0m")
+            print("\033[94mID\033[0m" + " " * 4 + "\033[94mNome\033[0m")
+            print("-" * 60)
             for autor in autores:
-                print(f"{autor[0]} = {autor[1]}")
+                # Formatação com espaçamento
+                print(f"\033[92m{autor[0]:<5}\033[0m" + f" {autor[1]:<50}")
         else:
             print("\033[93mNenhum autor encontrado.\033[0m")
     except Exception as e:

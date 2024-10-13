@@ -31,9 +31,12 @@ def listar_categorias():
         categorias = cursor.fetchall()
         
         if categorias:
-            print("Categorias cadastradas:")
+            print("\033[96mCategorias cadastradas:\033[0m")
+            print("\033[94mID\033[0m" + " " * 4 + "\033[94mNome da Categoria\033[0m")
+            print("-" * 50)
             for categoria in categorias:
-                print(f"{categoria[0]} = {categoria[1]}")
+                # Formatação com espaçamento
+                print(f"\033[92m{categoria[0]:<5}\033[0m" + f" {categoria[1]:<40}")
         else:
             print("\033[93mNenhuma categoria encontrada.\033[0m")
     except Exception as e:

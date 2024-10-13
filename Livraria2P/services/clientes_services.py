@@ -58,9 +58,12 @@ def listar_clientes():
         clientes = cursor.fetchall()
         
         if clientes:
-            print("Clientes cadastrados:")
+            print("\033[96mClientes cadastrados:\033[0m")
+            print("\033[94mID\033[0m" + " " * 4 + "\033[94mNome\033[0m" + " " * 22 + "\033[94mCPF\033[0m")
+            print("-" * 60)
             for cliente in clientes:
-                print(f"{cliente[0]} = {cliente[1]} | {cliente[4]}")
+                # Formatação com espaçamento
+                print(f"\033[92m{cliente[0]:<5}\033[0m" + f" {cliente[1]:<25} {cliente[4]}")
         else:
             print("\033[93mNenhum cliente encontrado.\033[0m")
     except Exception as e:

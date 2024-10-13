@@ -18,7 +18,6 @@ def cadastrar_editora(nome, endereco):
         cursor.close()
         conn.close()
 
-
 def listar_editoras():
     conn = criar_conexao()
     if conn is None:
@@ -32,9 +31,12 @@ def listar_editoras():
         editoras = cursor.fetchall()
         
         if editoras:
-            print("Editoras cadastradas:")
+            print("\033[96mEditoras cadastradas:\033[0m")
+            print("\033[94mID\033[0m" + " " * 4 + "\033[94mNome\033[0m" + " " * 20 + "\033[94mEndereço\033[0m")
+            print("-" * 60)
             for editora in editoras:
-                print(f"{editora[0]} = {editora[1]} | {editora[2]}")
+                # Formatação com espaçamento
+                print(f"\033[92m{editora[0]:<5}\033[0m" + f" {editora[1]:<25} {editora[2]}")
         else:
             print("\033[93mNenhuma editora encontrada.\033[0m")
     except Exception as e:

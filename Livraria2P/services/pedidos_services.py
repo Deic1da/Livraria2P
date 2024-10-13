@@ -3,7 +3,7 @@ import time
 from services.database import criar_conexao
 from services.clientes_services import listar_clientes
 
-def vender_livro(pesquisa, produto, funcionario):
+def vender_livro(produto, funcionario):
     conn = criar_conexao()
     if conn is None:
         print("\033[91mErro na conexão com o banco de dados.\033[0m")
@@ -12,8 +12,8 @@ def vender_livro(pesquisa, produto, funcionario):
     try:
         cursor = conn.cursor()
 
-        query = "SELECT * FROM livros WHERE id_livro = (%s);"
-        cursor.execute(query, (pesquisa, produto,))
+        query = "SELECT * FROM livros WHERE id_livro = %s;"
+        cursor.execute(query, (produto,))
         livros = cursor.fetchall()
         
         if livros:
