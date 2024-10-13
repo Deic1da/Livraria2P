@@ -15,6 +15,7 @@ def procurar_livro(funcionario):
             print("\033[92m0 - Voltar\033[0m\n")
 
             escolha = int(input("Digite sua escolha: "))
+            os.system("cls")
 
             if 0 <= escolha <= 4:
                 if escolha == 0:
