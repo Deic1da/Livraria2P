@@ -7,11 +7,11 @@ def gerenciar():
     while True:
         try:
             os.system("cls")
-            print("Gerenciar Livraria2P")
-            print("1 - Cadastrar Livro")
-            print("2 - Cadastrar Cliente")
-            print("3 - Cadastrar Funcionario")
-            print("0 - Sair\n")
+            print("\033[94mGerenciar Livraria2P\033[0m")
+            print("\033[92m1 - Cadastrar Livro\033[0m")
+            print("\033[92m2 - Cadastrar Cliente\033[0m")
+            print("\033[92m3 - Cadastrar Funcionario\033[0m")
+            print("\033[91m0 - Sair\033[0m\n")
             
             escolha = int(input("Digite sua escolha: "))
 
@@ -25,6 +25,6 @@ def gerenciar():
                 elif escolha == 3:
                     cadastrar_funcionario()
             else:
-                print("\033[93mErro: Digite um número entre 0 e 2!\033[0m")
+                print("\033[93mErro: Digite um número entre 0 e 3!\033[0m")
         except ValueError:
             print("\033[91mErro: Entrada inválida! Por favor, digite um número.\033[0m")

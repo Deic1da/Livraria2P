@@ -3,7 +3,7 @@ import time
 from services.database import criar_conexao
 from services.clientes_services import listar_clientes
 
-def vender_livro(produto,funcionario):
+def vender_livro(pesquisa, produto, funcionario):
     conn = criar_conexao()
     if conn is None:
         print("\033[91mErro na conexão com o banco de dados.\033[0m")
@@ -13,7 +13,7 @@ def vender_livro(produto,funcionario):
         cursor = conn.cursor()
 
         query = "SELECT * FROM livros WHERE id_livro = (%s);"
-        cursor.execute(query, (produto,))
+        cursor.execute(query, (pesquisa, produto,))
         livros = cursor.fetchall()
         
         if livros:
@@ -33,7 +33,7 @@ def vender_livro(produto,funcionario):
                 editora = cursor.fetchone()[0]
                 
                 os.system("cls")
-                print(f"\033[93mID:{livro[0]}\033[0m | Título: {livro[1]} | Categoria: {categoria} | Autor: {autor} | Editora: {editora} | Estoque: {livro[5]} | Preço: R${livro[6]}\n")
+                print(f"\033[93mID:{livro[0]}\033[0m | Título: {livro[1]} | Categoria: {categoria} | Autor: {autor} | Editora: {editora} | Estoque: {livro[5]} | Preço: R${livro[6]:.2f}\n")  # Mensagem em amarelo
             
             quantidade_vendida = int(input("Digite a quantidade a ser vendida: "))
             
@@ -63,14 +63,14 @@ def vender_livro(produto,funcionario):
                 print(f"\033[92mVenda realizada com sucesso!\033[0m Novo estoque: {novo_estoque}")
                 time.sleep(3)
             else:
-                print("\033[91mErro: Quantidade solicitada excede o estoque disponível.\033[0m")
+                print("\033[91mErro: Quantidade solicitada excede o estoque disponível.\033[0m") 
                 time.sleep(3)
         else:
             print("\033[91mNenhum livro encontrado.\033[0m")
             time.sleep(3)
 
     except Exception as e:
-        print(f"\033[91mErro ao listar ou vender livro: {e}\033[0m")
+        print(f"\033[91mErro ao listar ou vender livro: {e}\033[0m") 
         time.sleep(3)
 
     finally:

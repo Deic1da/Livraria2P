@@ -3,7 +3,7 @@ from services.database import criar_conexao
 def cadastrar_categoria(nome):
     conn = criar_conexao()
     if conn is None:
-        print("Erro na conexão com o banco de dados.")
+        print("\033[91mErro na conexão com o banco de dados.\033[0m")
         return
     
     try:
@@ -11,9 +11,9 @@ def cadastrar_categoria(nome):
         query = "INSERT INTO categorias(nome_Categoria) VALUES(%s);"
         cursor.execute(query, (nome,))
         conn.commit()
-        print("Categoria inserida com sucesso!")
+        print("\033[92mCategoria inserida com sucesso!\033[0m")
     except Exception as e:
-        print(f"Erro ao inserir categoria: {e}")
+        print(f"\033[91mErro ao inserir categoria: {e}\033[0m")
     finally:
         cursor.close()
         conn.close()
@@ -21,7 +21,7 @@ def cadastrar_categoria(nome):
 def listar_categorias():
     conn = criar_conexao()
     if conn is None:
-        print("Erro na conexão com o banco de dados.")
+        print("\033[91mErro na conexão com o banco de dados.\033[0m")
         return
     
     try:
@@ -35,9 +35,9 @@ def listar_categorias():
             for categoria in categorias:
                 print(f"{categoria[0]} = {categoria[1]}")
         else:
-            print("Nenhuma categoria encontrada.")
+            print("\033[93mNenhuma categoria encontrada.\033[0m")
     except Exception as e:
-        print(f"Erro ao listar categorias: {e}")
+        print(f"\033[91mErro ao listar categorias: {e}\033[0m")
     finally:
         cursor.close()
         conn.close()

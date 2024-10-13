@@ -3,7 +3,7 @@ from services.database import criar_conexao
 def cadastrar_autor(nome):
     conn = criar_conexao()
     if conn is None:
-        print("Erro na conexão com o banco de dados.")
+        print("\033[91mErro na conexão com o banco de dados.\033[0m")
         return
     
     try:
@@ -11,9 +11,9 @@ def cadastrar_autor(nome):
         query = "INSERT INTO autores(nome_Autor) VALUES(%s);"
         cursor.execute(query, (nome,))
         conn.commit()
-        print("Autor inserido com sucesso!")
+        print("\033[92mAutor inserido com sucesso!\033[0m")
     except Exception as e:
-        print(f"Erro ao inserir autor: {e}")
+        print(f"\033[91mErro ao inserir autor: {e}\033[0m")
     finally:
         cursor.close()
         conn.close()
@@ -21,7 +21,7 @@ def cadastrar_autor(nome):
 def listar_autores():
     conn = criar_conexao()
     if conn is None:
-        print("Erro na conexão com o banco de dados.")
+        print("\033[91mErro na conexão com o banco de dados.\033[0m")
         return
     
     try:
@@ -35,9 +35,9 @@ def listar_autores():
             for autor in autores:
                 print(f"{autor[0]} = {autor[1]}")
         else:
-            print("Nenhum autor encontrado.")
+            print("\033[93mNenhum autor encontrado.\033[0m")
     except Exception as e:
-        print(f"Erro ao listar autores: {e}")
+        print(f"\033[91mErro ao listar autores: {e}\033[0m")
     finally:
         cursor.close()
         conn.close()

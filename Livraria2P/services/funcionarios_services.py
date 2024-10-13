@@ -26,7 +26,7 @@ def cadastrar_funcionario():
         senha = input("Digite a senha: ")
 
         cursor = conn.cursor()
-        query = "INSERT INTO funcionarios(nome,email,senha) VALUES(%s,%s,%s);"
+        query = "INSERT INTO funcionarios(nome, email, senha) VALUES(%s, %s, %s);"
         cursor.execute(query, (nome, email, senha))
         conn.commit()
         os.system("cls")

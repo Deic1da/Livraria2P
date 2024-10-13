@@ -17,7 +17,7 @@ def tentativa_login():
         
         if funcionario is None:
             print("\033[91mEmail não encontrado!\033[0m")
-            time.sleep(2)
+            time.sleep(1)
             return None
 
         senha = input("Digite a senha: ")
@@ -25,17 +25,17 @@ def tentativa_login():
         senha_armazenada = funcionario[1]
         id_funcionario = funcionario[0]
         if senha_armazenada == senha:
-            print(f"\033[92mLogin realizado com sucesso!\033[0m")
-            time.sleep(2)
+            print("\033[92mLogin realizado com sucesso!\033[0m")
+            time.sleep(1)
             return str(id_funcionario)
         else:
             print("\033[91mSenha incorreta!\033[0m")
-            time.sleep(2)
+            time.sleep(1)
             return None
     
     except Exception as e:
-        print(f"\033[91mErro ao tentar logar: {e}\033[0m")
-        time.sleep(2)
+        print(f"\033[91mErro ao tentar logar: {e}\033[0m")  
+        time.sleep(1)
         return None
     
     finally:

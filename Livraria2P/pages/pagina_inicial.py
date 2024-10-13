@@ -6,17 +6,17 @@ def pagina_inicial(funcionario):
     while True:
         try:
             os.system("cls")
-            print(funcionario)
-            print("Livraria2P")
-            print("1 - Procurar Livro")
-            print("2 - Gerenciar Livraria2P")
-            print("0 - Sair\n")
+            print(f"\033[94mFuncionário ID: {funcionario}\033[0m")
+            print("\033[96mLivraria2P\033[0m")
+            print("\033[92m1 - Procurar Livro\033[0m")
+            print("\033[92m2 - Gerenciar Livraria2P\033[0m")
+            print("\033[92m0 - Sair\033[0m\n")
             
             escolha = int(input("Digite sua escolha: "))
 
             if 0 <= escolha <= 2:
                 if escolha == 0:
-                    return()
+                    return
                 elif escolha == 1:
                     procurar_livro(funcionario)
                 elif escolha == 2:

@@ -74,11 +74,10 @@ def cadastrar_livro():
         conn.close()
 
 
-
 def listar_livros():
     conn = criar_conexao()
     if conn is None:
-        print("Erro na conexão com o banco de dados.")
+        print("\033[91mErro na conexão com o banco de dados.\033[0m")
         return
     
     try:
@@ -88,9 +87,10 @@ def listar_livros():
         livros = cursor.fetchall()
         
         if livros:
-            print("clientes cadastrados:")
+            print("\033[96mLivros cadastrados:\033[0m")
+            print(f"{'ID':<5} | {'Título':<50} | {'Categoria':<30} | {'Autor':<30} | {'Editora':<30} | {'Estoque':<10} | {'Preço':<15}")
+            print("-" * 130)
             for livro in livros:
-
                 query_categoria = "SELECT nome_Categoria FROM categorias WHERE id_Categoria = %s;"
                 cursor.execute(query_categoria, (livro[2],))
                 categoria = cursor.fetchone()[0]
@@ -103,11 +103,11 @@ def listar_livros():
                 cursor.execute(query_editora, (livro[4],))
                 editora = cursor.fetchone()[0]
 
-                print(f"{livro[0]} = {livro[1]} | {categoria} | {autor} | {editora} | {livro[5]} | R${livro[6]}")
+                print(f"\033[92m{livro[0]:<5}\033[0m | {livro[1]:<50} | \033[93m{categoria:<30}\033[0m | \033[94m{autor:<30}\033[0m | \033[95m{editora:<30}\033[0m | {livro[5]:<10} | R${livro[6]:<15}")
         else:
-            print("Nenhum livro encontrado.")
+            print("\033[93mNenhum livro encontrado.\033[0m")
     except Exception as e:
-        print(f"Erro ao listar livros: {e}")
+        print(f"\033[91mErro ao listar livros: {e}\033[0m")
     finally:
         cursor.close()
         conn.close()
@@ -116,20 +116,21 @@ def listar_livros():
 def listar_livros_personalisado(autor2, pesquisa):
     conn = criar_conexao()
     if conn is None:
-        print("Erro na conexão com o banco de dados.")
+        print("\033[91mErro na conexão com o banco de dados.\033[0m")
         return
     
     try:
         cursor = conn.cursor()
-        query = f"SELECT * FROM livros where {pesquisa} = %s;"
+        query = f"SELECT * FROM livros WHERE {pesquisa} = %s;"
         cursor.execute(query, (autor2,))
         livros = cursor.fetchall()
         
         if livros:
             os.system("cls")
-            print("Livros cadastrados: ")
+            print("\033[96mLivros cadastrados:\033[0m")
+            print(f"{'ID':<5} | {'Título':<50} | {'Categoria':<30} | {'Autor':<30} | {'Editora':<30} | {'Estoque':<10} | {'Preço':<15}")
+            print("-" * 130) 
             for livro in livros:
-
                 query_categoria = "SELECT nome_Categoria FROM categorias WHERE id_Categoria = %s;"
                 cursor.execute(query_categoria, (livro[2],))
                 categoria = cursor.fetchone()[0]
@@ -142,11 +143,11 @@ def listar_livros_personalisado(autor2, pesquisa):
                 cursor.execute(query_editora, (livro[4],))
                 editora = cursor.fetchone()[0]
 
-                print(f"{livro[0]} = {livro[1]} | {categoria} | {autor} | {editora} | {livro[5]} | R${livro[6]}")
+                print(f"\033[92m{livro[0]:<5}\033[0m | {livro[1]:<50} | \033[93m{categoria:<30}\033[0m | \033[94m{autor:<30}\033[0m | \033[95m{editora:<30}\033[0m | {livro[5]:<10} | R${livro[6]:<15}")
         else:
-            print("Nenhum livro encontrado.")
+            print("\033[93mNenhum livro encontrado.\033[0m")
     except Exception as e:
-        print(f"Erro ao listar livros: {e}")
+        print(f"\033[91mErro ao listar livros: {e}\033[0m")
     finally:
         cursor.close()
         conn.close()

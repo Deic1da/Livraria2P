@@ -45,13 +45,10 @@ def cadastrar_cliente():
         cursor.close()
         conn.close()
 
-
-    
-
 def listar_clientes():
     conn = criar_conexao()
     if conn is None:
-        print("Erro na conexão com o banco de dados.")
+        print("\033[91mErro na conexão com o banco de dados.\033[0m")
         return
     
     try:
@@ -61,13 +58,13 @@ def listar_clientes():
         clientes = cursor.fetchall()
         
         if clientes:
-            print("clientes cadastrados:")
+            print("Clientes cadastrados:")
             for cliente in clientes:
                 print(f"{cliente[0]} = {cliente[1]} | {cliente[4]}")
         else:
-            print("Nenhum cliente encontrado.")
+            print("\033[93mNenhum cliente encontrado.\033[0m")
     except Exception as e:
-        print(f"Erro ao listar clientes: {e}")
+        print(f"\033[91mErro ao listar clientes: {e}\033[0m")
     finally:
         cursor.close()
         conn.close()

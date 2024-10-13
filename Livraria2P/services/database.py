@@ -9,9 +9,9 @@ def criar_conexao():
             host='localhost',
             port='5432'
         )
-        #print(f"\033[92mBD Conectado!\033[0m")
+        print("\033[92mBD Conectado com sucesso!\033[0m")
         return conn
 
     except Exception as e:
-        print(f"Erro ao conectar com o banco de dados: {e}")
+        print(f"\033[91mErro ao conectar com o banco de dados: {e}\033[0m")
         return None
