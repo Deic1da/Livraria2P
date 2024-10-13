@@ -33,7 +33,7 @@ def listar_categorias():
         if categorias:
             print("\033[96mCategorias cadastradas:\033[0m")
             print("\033[94mID\033[0m" + " " * 4 + "\033[94mNome da Categoria\033[0m")
-            print("-" * 50)
+            print("-" * 60)
             for categoria in categorias:
                 # Formatação com espaçamento
                 print(f"\033[92m{categoria[0]:<5}\033[0m" + f" {categoria[1]:<40}")

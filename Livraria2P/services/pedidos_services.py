@@ -95,7 +95,7 @@ def listar_pedidos():
         if pedidos:
             print("\033[92mPedidos cadastrados:\033[0m")
             print("\033[96mID do Pedido | Cliente              | Livro                    | Quantidade | Preço Total    | Funcionário          | Data\033[0m")
-            print("-----------------------------------------------------------------------------------------------------------------------------------")
+            print("-" * 170)
 
             for pedido in pedidos:
             

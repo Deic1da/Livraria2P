@@ -89,7 +89,7 @@ def listar_livros():
         if livros:
             print("\033[96mLivros cadastrados:\033[0m")
             print(f"{'ID':<5} | {'Título':<50} | {'Categoria':<30} | {'Autor':<30} | {'Editora':<30} | {'Estoque':<10} | {'Preço':<15}")
-            print("-" * 130)
+            print("-" * 180)
             for livro in livros:
                 query_categoria = "SELECT nome_Categoria FROM categorias WHERE id_Categoria = %s;"
                 cursor.execute(query_categoria, (livro[2],))
@@ -129,7 +129,7 @@ def listar_livros_personalisado(autor2, pesquisa):
             os.system("cls")
             print("\033[96mLivros cadastrados:\033[0m")
             print(f"{'ID':<5} | {'Título':<50} | {'Categoria':<30} | {'Autor':<30} | {'Editora':<30} | {'Estoque':<10} | {'Preço':<15}")
-            print("-" * 130) 
+            print("-" * 180) 
             for livro in livros:
                 query_categoria = "SELECT nome_Categoria FROM categorias WHERE id_Categoria = %s;"
                 cursor.execute(query_categoria, (livro[2],))

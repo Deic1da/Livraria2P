@@ -12,7 +12,7 @@ def procurar_livro(funcionario):
             print("\033[92m2 - Por Autor\033[0m")
             print("\033[92m3 - Por Categoria\033[0m")
             print("\033[92m4 - Por Editora\033[0m")
-            print("\033[92m0 - Voltar\033[0m\n")
+            print("\033[91m0 - Voltar\033[0m\n")
 
             escolha = int(input("Digite sua escolha: "))
             os.system("cls")
