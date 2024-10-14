@@ -1,8 +1,8 @@
 from services import *
 from pages import *
-import time
 import os
 from pages.deletar_page import deletar_page
+from pages.editar_page import editar_page
 
 def gerenciar_page():
     while True:
@@ -13,12 +13,13 @@ def gerenciar_page():
             print("\033[92m2 - Cadastrar Cliente\033[0m")
             print("\033[92m3 - Cadastrar Funcionario\033[0m")
             print("\033[92m4 - Deletar\033[0m")
+            print("\033[92m5 - Editar\033[0m")
             print("\033[91m0 - Voltar\033[0m\n")
             
             escolha = int(input("Digite sua escolha: "))
             os.system("cls")
 
-            if 0 <= escolha <= 4:
+            if 0 <= escolha <= 5:
                 if escolha == 0:
                     return
                 elif escolha == 1:
@@ -29,6 +30,8 @@ def gerenciar_page():
                     cadastrar_funcionario()
                 elif escolha == 4:
                     deletar_page()
+                elif escolha == 5:
+                    editar_page()
             else:
                 print("\033[93mErro: Digite um número entre 0 e 3!\033[0m")
         except ValueError:

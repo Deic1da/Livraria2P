@@ -8,25 +8,37 @@ import re
 def validar_email(email):
     padrão = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}(?:\.[a-zA-Z]{2,})?$"
     
-    if not re.match(padrão, email):
-        print("\033[91mErro: email inválido.\033[0m")
+    try:
+        if not re.match(padrão, email):
+            print("\033[91mErro: email inválido.\033[0m")
+            return False
+        else:
+            return True
+    except Exception as e:
+        print(f"\033[91mErro ao validar email: {e}\033[0m")
         return False
-    else:
-        return True
     
 
 def validar_nome(nome):
-    if re.search(r'\d', nome):
-        print("\033[91mErro: O nome não deve conter números.\033[0m")
+    try:
+        if re.search(r'\d', nome):
+            print("\033[91mErro: O nome não deve conter números.\033[0m")
+            return False
+        return True
+    except Exception as e:
+        print(f"\033[91mErro ao validar nome: {e}\033[0m")
         return False
-    return True
 
 
 def validar_cpf(cpf):
-    if not re.match(r'^\d{11}$', cpf):
-        print("\033[91mErro: O CPF deve conter exatamente 11 dígitos numéricos.\033[0m")
+    try:
+        if not re.match(r'^\d{11}$', cpf):
+            print("\033[91mErro: O CPF deve conter exatamente 11 dígitos numéricos.\033[0m")
+            return False
+        return True
+    except Exception as e:
+        print(f"\033[91mErro ao validar CPF: {e}\033[0m")
         return False
-    return True
 
 def verificar_funcionario():
     conn = criar_conexao()
@@ -45,6 +57,7 @@ def verificar_funcionario():
             return False
     except Exception as e:
         print(f"\033[91mErro ao listar funcionarios: {e}\033[0m")
+        return False
     finally:
         cursor.close()
         conn.close()

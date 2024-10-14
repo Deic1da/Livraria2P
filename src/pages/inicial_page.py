@@ -1,7 +1,7 @@
 from pages.procurar_livro_page import procurar_livro_page
 from pages.gerenciar_page import gerenciar_page
-import time
 import os
+import time
 from services import *
 
 def inicial_page(funcionario):
@@ -28,6 +28,8 @@ def inicial_page(funcionario):
                 elif escolha == 3:
                     listar_pedidos()
             else:
-                print("\033[93mErro: Digite um número entre 0 e 2!\033[0m")
+                print("\033[91mErro: Digite um número entre 0 e 2!\033[0m")
+                time.sleep(1)
         except ValueError:
             print("\033[91mErro: Entrada inválida! Por favor, digite um número.\033[0m")
+            time.sleep(1)

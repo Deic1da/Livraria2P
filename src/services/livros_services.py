@@ -47,11 +47,20 @@ def cadastrar_livro():
             listar_editoras()
             id_Editora = int(input("Escolha a editora: "))
 
-        os.system("cls")
-        estoque = int(input("Digite a quantidade de livros: "))
-        os.system("cls")
-        preco = float(input("Digite o preço: "))
-
+        while(True):
+            os.system("cls")
+            estoque = int(input("Digite a quantidade de livros(0 para sair): "))
+            if estoque<0:
+                print("\033[91mErro: A quantidade de livros não pode ser negativa.\033[0m")
+            else:
+                break
+        while(True):
+            os.system("cls")
+            preco = float(input("Digite o preço(0 para sair): "))
+            if preco<0:
+                print("\033[91mErro: O preço não pode ser negativo.\033[0m")
+            else:
+                break
         cursor = conn.cursor()
         query = "INSERT INTO livros(nome_Livro, id_Categoria, id_Autor, id_Editora, estoque, preco) VALUES(%s, %s, %s, %s, %s, %s);"
         cursor.execute(query, (nome_Livro, id_Categoria, id_Autor, id_Editora, estoque, preco,))
