@@ -1,3 +1,4 @@
+from pages import *
 import time
 import os
 from services.deletar_services import deletar

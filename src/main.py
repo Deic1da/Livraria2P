@@ -1,4 +1,6 @@
 from services import *
+from pages import *
+from pages.inicial_page import inicial_page
 from services.criar_tabelas import criar_tabelas
 from services.verificador import verificar_funcionario
 

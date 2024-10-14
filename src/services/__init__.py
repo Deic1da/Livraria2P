@@ -9,11 +9,7 @@ from .livros_services import listar_livros, cadastrar_livro, listar_livros_perso
 from .pedidos_services import listar_pedidos, vender_livro
 from .verificador import validar_email, validar_nome, validar_cpf
 from .login import tentativa_login
-from pages.deletar_page import deletar_page
-from pages.gerenciar_page import gerenciar_page
-from pages.login_page import login_page
-from pages.inicial_page import inicial_page
-from pages.procurar_livro_page import procurar_livro_page
+
 
 __all__ = [
     "listar_autores", "cadastrar_autor",
@@ -27,6 +23,5 @@ __all__ = [
     "listar_pedidos", "vender_livro",
     "validar_email", "validar_nome", "validar_cpf",
     "tentativa_login",
-    "procurar_livro_page","inicial_page","login_page","gerenciar_page","deletar_page"
 ]
 

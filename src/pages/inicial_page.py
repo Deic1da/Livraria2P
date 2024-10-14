@@ -13,7 +13,7 @@ def inicial_page(funcionario):
             print("\033[92m1 - Procurar Livro\033[0m")
             print("\033[92m2 - Gerenciar Livraria2P\033[0m")
             print("\033[92m3 - Historico de vendas\033[0m")
-            print("\033[92m0 - Sair\033[0m\n")
+            print("\033[91m0 - Sair\033[0m\n")
             
             escolha = int(input("Digite sua escolha: "))
             os.system("cls")
