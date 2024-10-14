@@ -9,11 +9,9 @@ from services.autores_services import *
 from services.editoras_services import *
 from pages.editar_livro_page import editar_livro
 
-
 def editar_page():
     try:
         while True:
-            
             os.system("cls")
             print("\033[96mEditar\033[0m")
             print("\033[92m1 - Livro\033[0m")
@@ -22,7 +20,7 @@ def editar_page():
             print("\033[92m4 - Editora\033[0m")
             print("\033[91m0 - Voltar\033[0m\n")
 
-            escolha = int(input("Digite sua escolha: "))
+            escolha = int(input("\033[94mDigite sua escolha: \033[0m"))
             os.system("cls")
 
             if 0 <= escolha <= 4:
@@ -34,33 +32,33 @@ def editar_page():
 
                 elif escolha == 2:
                     listar_autores()
-                    id = int(input("Selecione o autor que deseja editar(0 para cancelar):"))
+                    id = int(input("\033[94mSelecione o autor que deseja editar (0 para cancelar): \033[0m"))
                     if id == 0:
                         return
                     else:
                         os.system("cls")
-                        novo = input("Digite o novo nome do autor:")
-                        editar(id,"id_autor","autores","nome_autor",novo)
+                        novo = input("\033[94mDigite o novo nome do autor: \033[0m")
+                        editar(id, "id_autor", "autores", "nome_autor", novo)
                         os.system("cls")
-                        print("Autor alterado com sucesso!")
-                        time.sleep(6)
+                        print("\033[92mAutor alterado com sucesso!\033[0m")
+                        time.sleep(2)
 
                 elif escolha == 3:
                     listar_categorias()
-                    id = int(input("Selecione a categoria que deseja editar(0 para cancelar):"))
+                    id = int(input("\033[94mSelecione a categoria que deseja editar (0 para cancelar): \033[0m"))
                     if id == 0:
                         return
                     else:
                         os.system("cls")
-                        novo = input("Digite o novo nome da categoria:")
-                        editar(id,"id_categoria","categorias","nome_categoria",novo)
+                        novo = input("\033[94mDigite o novo nome da categoria: \033[0m")
+                        editar(id, "id_categoria", "categorias", "nome_categoria", novo)
                         os.system("cls")
-                        print("Categoria alterado com sucesso!")
-                        time.sleep(6)
+                        print("\033[92mCategoria alterada com sucesso!\033[0m")
+                        time.sleep(2)
 
                 elif escolha == 4:
                     listar_editoras()
-                    id = int(input("Selecione a editora que deseja editar(0 para cancelar):"))
+                    id = int(input("\033[94mSelecione a editora que deseja editar (0 para cancelar): \033[0m"))
                     os.system("cls")
                     print("\033[96mO que deseja editar?\033[0m")
                     print("\033[92m1 - Nome\033[0m")
@@ -77,11 +75,13 @@ def editar_page():
                             novo = input("\033[94mDigite o novo nome da editora: \033[0m")
                             editar(id, "id_editora", "editoras", "nome_editora", novo)
                             print("\033[92mNome da editora atualizado com sucesso!\033[0m")
+                            time.sleep(2)
                         
                         elif escolha == 2:
                             novo = input("\033[94mDigite o novo endereço da editora: \033[0m")
                             editar(id, "id_editora", "editoras", "endereco", novo)
                             print("\033[92mEndereço da editora atualizado com sucesso!\033[0m")
+                            time.sleep(2)
                     
     except ValueError:
         print("\033[91mPor favor, digite um número válido.\033[0m")
