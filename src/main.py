@@ -5,7 +5,7 @@ from services.verificador import verificar_funcionario
 criar_tabelas()
 
 try:
-    if verificar_funcionario():
+    """if verificar_funcionario():
         while True:
             funcionario = login_page()
             if funcionario is not None:
@@ -15,8 +15,8 @@ try:
         while True:
             funcionario = login_page()
             if funcionario is not None:
-                break
-
+                break"""
+    funcionario = 1
     inicial_page(funcionario)
 
 except Exception as e:

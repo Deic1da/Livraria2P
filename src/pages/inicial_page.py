@@ -2,6 +2,7 @@ from pages.procurar_livro_page import procurar_livro_page
 from pages.gerenciar_page import gerenciar_page
 import time
 import os
+from services import *
 
 def inicial_page(funcionario):
     while True:
@@ -15,6 +16,7 @@ def inicial_page(funcionario):
             print("\033[92m0 - Sair\033[0m\n")
             
             escolha = int(input("Digite sua escolha: "))
+            os.system("cls")
 
             if 0 <= escolha <= 3:
                 if escolha == 0:
