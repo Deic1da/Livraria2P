@@ -38,30 +38,33 @@ def vender_livro(produto, funcionario):
             quantidade_vendida = int(input("Digite a quantidade a ser vendida: "))
             
             if quantidade_vendida <= livro[5]:
-                
-                listar_clientes()
-                id_cliente = int(input("Digite o ID do cliente: "))
-                
-                id_funcionario = funcionario
-                
-                preco_total = quantidade_vendida * livro[6]
+                if quantidade_vendida >= 0:
+                    listar_clientes()
+                    id_cliente = int(input("Digite o ID do cliente: "))
+                    
+                    id_funcionario = funcionario
+                    
+                    preco_total = quantidade_vendida * livro[6]
 
-                data_pedido = time.strftime("%Y%m%d")
-                
-                query_pedido = """
-                    INSERT INTO pedidos(id_cliente, id_livro, quantidade, preco_pedido, id_funcionario, data_pedido)
-                    VALUES (%s, %s, %s, %s, %s, %s);
-                """
-                cursor.execute(query_pedido, (id_cliente, livro[0], quantidade_vendida, preco_total, id_funcionario, data_pedido))
-                conn.commit()
+                    data_pedido = time.strftime("%Y%m%d")
+                    
+                    query_pedido = """
+                        INSERT INTO pedidos(id_cliente, id_livro, quantidade, preco_pedido, id_funcionario, data_pedido)
+                        VALUES (%s, %s, %s, %s, %s, %s);
+                    """
+                    cursor.execute(query_pedido, (id_cliente, livro[0], quantidade_vendida, preco_total, id_funcionario, data_pedido))
+                    conn.commit()
 
-                novo_estoque = livro[5] - quantidade_vendida
-                query_atualizar = "UPDATE livros SET estoque = %s WHERE id_livro = %s;"
-                cursor.execute(query_atualizar, (novo_estoque, livro[0]))
-                conn.commit()
+                    novo_estoque = livro[5] - quantidade_vendida
+                    query_atualizar = "UPDATE livros SET estoque = %s WHERE id_livro = %s;"
+                    cursor.execute(query_atualizar, (novo_estoque, livro[0]))
+                    conn.commit()
 
-                print(f"\033[92mVenda realizada com sucesso!\033[0m Novo estoque: {novo_estoque}")
-                time.sleep(3)
+                    print(f"\033[92mVenda realizada com sucesso!\033[0m Novo estoque: {novo_estoque}")
+                    time.sleep(3)
+                else:
+                    print("\033[91mErro: Quantidade solicitada menor que 0.\033[0m") 
+                    time.sleep(3)
             else:
                 print("\033[91mErro: Quantidade solicitada excede o estoque disponível.\033[0m") 
                 time.sleep(3)
