@@ -26,24 +26,25 @@ def editar_cliente():
                     return
                 
                 elif escolha == 1:
-                    novo = input("\033[94mDigite o novo nome do livro: \033[0m")
-                    editar(id, "id_cliente", "clientes", "nome", novo)
-                    print("\033[92mNome do livro atualizado com sucesso!\033[0m")
-
+                    while(True):
+                        os.system("cls")
+                        novo = input("\033[94mDigite o novo nome do cliente: \033[0m")
+                        if validar_nome(novo):
+                            editar(id, "id_cliente", "clientes", "nome", novo)
+                            print("\033[92mNome do cliente atualizado com sucesso!\033[0m")
+                            break
+                        time.sleep(2)
+                        
                 elif escolha == 2:
-                    while (True):
+                    while(True):
                         os.system("cls")
                         novo = input("\033[94mDigite o novo email : \033[0m")
                         if validar_email(novo):
                             editar(id, "id_cliente", "clientes", "email", novo)
                             os.system("cls")
                             print("\033[92mCliente alterado com sucesso!\033[0m")
-                            time.sleep(2)
                             break
-                        else:
-                            print("Algo deu errado")
-                            time.sleep(2)
-                            break
+                        time.sleep(2)
 
                 elif escolha == 3:
                     os.system("cls")
@@ -61,12 +62,9 @@ def editar_cliente():
                             editar(id, "id_cliente", "clientes", "cpf", novo)
                             os.system("cls")
                             print("\033[92mCliente alterado com sucesso!\033[0m")
-                            time.sleep(2)
                             break
-                        else:
-                            print("Algo deu errado")
-                            time.sleep(2)
-                            break
+                        time.sleep(2)
+                        
     except ValueError:
         print("\033[91mPor favor, digite um número válido.\033[0m")
         time.sleep(2)
