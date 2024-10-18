@@ -4,6 +4,7 @@ import os
 from services.deletar_services import deletar
 from services.livros_services import *
 from services.funcionarios_services import listar_funcionarios
+from services.clientes_services import *
 
 def deletar_page():
     try:
@@ -16,12 +17,13 @@ def deletar_page():
             print("\033[92m3 - Categoria\033[0m")
             print("\033[92m4 - Editora\033[0m")
             print("\033[92m5 - Funcionario\033[0m")
+            print("\033[92m6 - Cliente\033[0m")
             print("\033[91m0 - Voltar\033[0m\n")
 
             escolha = int(input("Digite sua escolha: "))
             os.system("cls")
 
-            if 0 <= escolha <= 5:
+            if 0 <= escolha <= 6:
                 if escolha == 0:
                     return
                 elif escolha == 1:
@@ -53,6 +55,12 @@ def deletar_page():
                     id = input("Selecione o funcionario que deseja deletar(0 para cancelar):")
                     os.system("cls")
                     deletar(id,"funcionarios","id_funcionario")
+
+                elif escolha == 6:
+                    listar_clientes()
+                    id = input("Selecione o cliente que deseja deletar(0 para cancelar):")
+                    os.system("cls")
+                    deletar(id,"clientes","id_cliente")
 
     except ValueError:
         print("\033[91mPor favor, digite um número válido.\033[0m")

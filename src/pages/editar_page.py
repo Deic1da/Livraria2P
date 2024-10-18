@@ -8,6 +8,7 @@ from services.categorias_services import *
 from services.autores_services import *
 from services.editoras_services import *
 from pages.editar_livro_page import editar_livro
+from pages.editar_cliente_page import editar_cliente
 
 def editar_page():
     try:
@@ -18,12 +19,13 @@ def editar_page():
             print("\033[92m2 - Autor\033[0m")
             print("\033[92m3 - Categoria\033[0m")
             print("\033[92m4 - Editora\033[0m")
+            print("\033[92m5 - Cliente\033[0m")
             print("\033[91m0 - Voltar\033[0m\n")
 
             escolha = int(input("\033[94mDigite sua escolha: \033[0m"))
             os.system("cls")
 
-            if 0 <= escolha <= 4:
+            if 0 <= escolha <= 5:
                 if escolha == 0:
                     return
                 
@@ -82,6 +84,9 @@ def editar_page():
                             editar(id, "id_editora", "editoras", "endereco", novo)
                             print("\033[92mEndereço da editora atualizado com sucesso!\033[0m")
                             time.sleep(2)
+
+                elif escolha == 5:
+                    editar_cliente()
                     
     except ValueError:
         print("\033[91mPor favor, digite um número válido.\033[0m")
