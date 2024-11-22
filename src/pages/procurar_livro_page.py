@@ -1,5 +1,6 @@
 from services import *
 from pages import *
+from services.livros_services import procurar_por_nome
 import time
 import os
 
@@ -12,12 +13,13 @@ def procurar_livro_page(funcionario):
             print("\033[92m2 - Por Autor\033[0m")
             print("\033[92m3 - Por Categoria\033[0m")
             print("\033[92m4 - Por Editora\033[0m")
+            print("\033[92m5 - Pesquisa por Nome do Livro\033[0m")
             print("\033[91m0 - Voltar\033[0m\n")
 
             escolha = int(input("Digite sua escolha: "))
             os.system("cls")
 
-            if 0 <= escolha <= 4:
+            if 0 <= escolha <= 5:
                 if escolha == 0:
                     print("\033[92mSaindo do programa...\033[0m")
                     return
@@ -54,6 +56,14 @@ def procurar_livro_page(funcionario):
                     listar_editoras()
                     editora = input("Escolha a editora: ")
                     listar_livros_personalisado(editora, pesquisa)
+                    produto = int(input("Escolha o livro: "))
+                    os.system("cls")
+                    vender_livro(produto, funcionario)
+
+                elif escolha == 5:
+                    os.system("cls")
+                    pesquisa = input("Digite o nome do livro: ")
+                    procurar_por_nome(pesquisa)
                     produto = int(input("Escolha o livro: "))
                     os.system("cls")
                     vender_livro(produto, funcionario)

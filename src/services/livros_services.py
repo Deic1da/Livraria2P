@@ -154,3 +154,37 @@ def listar_livros_personalisado(autor2, pesquisa):
     finally:
         cursor.close()
         conn.close()
+
+def procurar_por_nome(pesquisa):
+    conn = criar_conexao()
+    if conn is None:
+        print("\033[91mErro na conexão com o banco de dados.\033[0m")
+        return
+    
+    try:
+        cursor = conn.cursor()
+        query = f"SELECT * FROM livros l WHERE l.nome_livro ILIKE %s ORDER BY id_livro ASC;"
+        cursor.execute(query, ('%'+pesquisa+'%',))
+        livros = cursor.fetchall()
+
+        for livro in livros:
+                query_categoria = "SELECT nome_Categoria FROM categorias WHERE id_Categoria = %s;"
+                cursor.execute(query_categoria, (livro[2],))
+                categoria = cursor.fetchone()[0]
+
+                query_autor = "SELECT nome_Autor FROM autores WHERE id_Autor = %s;"
+                cursor.execute(query_autor, (livro[3],))
+                autor = cursor.fetchone()[0]
+
+                query_editora = "SELECT nome_Editora FROM editoras WHERE id_Editora = %s;"
+                cursor.execute(query_editora, (livro[4],))
+                editora = cursor.fetchone()[0]
+
+                print(f"\033[92m{livro[0]:<5}\033[0m | {livro[1]:<50} | \033[93m{categoria:<30}\033[0m | \033[94m{autor:<30}\033[0m | \033[95m{editora:<30}\033[0m | {livro[5]:<10} | R${livro[6]:<15}")
+ 
+    except Exception as e:
+        print(f"\033[91mErro ao listar: {e}\033[0m")
+        time.sleep(2)
+    finally:
+        cursor.close()
+        conn.close()
