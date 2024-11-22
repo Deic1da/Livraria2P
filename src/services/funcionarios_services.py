@@ -3,6 +3,7 @@ import time
 import os
 from services.database import criar_conexao
 from services.verificador import *
+from services.Criptografia_services import criotpgrafar
 
 def cadastrar_funcionario():
     conn = criar_conexao()
@@ -28,6 +29,7 @@ def cadastrar_funcionario():
         os.system("cls")
         print("Cadastrar Funcionario")
         senha = input("Digite a senha: ")
+        senha = criotpgrafar(senha)
 
         cursor = conn.cursor()
         query = "INSERT INTO funcionarios(nome, email, senha) VALUES(%s, %s, %s);"

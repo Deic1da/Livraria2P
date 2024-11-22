@@ -2,6 +2,7 @@ from services import *
 import time
 import os
 from services.database import criar_conexao
+from services.Criptografia_services import checar_password
 
 def tentativa_login():
     conn = criar_conexao()
@@ -26,7 +27,8 @@ def tentativa_login():
         
         senha_armazenada = funcionario[1]
         id_funcionario = funcionario[0]
-        if senha_armazenada == senha:
+
+        if checar_password(senha, senha_armazenada):
             print("\033[92mLogin realizado com sucesso!\033[0m")
             time.sleep(1)
             return str(id_funcionario)

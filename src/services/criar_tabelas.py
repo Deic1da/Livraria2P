@@ -38,7 +38,7 @@ def criar_tabelas():
                     id_funcionario SERIAL PRIMARY KEY,
                     nome VARCHAR(500) NOT NULL,
                     email VARCHAR(1000) NOT NULL UNIQUE,
-                    senha VARCHAR(100) NOT NULL
+                    senha bytea NOT NULL
                    );
 
                     CREATE TABLE IF NOT EXISTS livros (
