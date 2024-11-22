@@ -3,6 +3,7 @@ import time
 import os
 from services.database import criar_conexao
 from services.Criptografia_services import checar_password
+import pwinput
 
 def tentativa_login():
     conn = criar_conexao()
@@ -23,7 +24,7 @@ def tentativa_login():
             time.sleep(1)
             return None
 
-        senha = input("Digite a senha: ")
+        senha = pwinput.pwinput("Digite a senha: ")
         
         senha_armazenada = funcionario[1]
         id_funcionario = funcionario[0]
