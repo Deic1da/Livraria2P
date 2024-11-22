@@ -85,7 +85,7 @@ def listar_livros():
     
     try:
         cursor = conn.cursor()
-        query = "SELECT * FROM livros;"
+        query = "SELECT * FROM livros ORDER BY id_livro ASC;"
         cursor.execute(query)
         livros = cursor.fetchall()
         
@@ -124,7 +124,7 @@ def listar_livros_personalisado(autor2, pesquisa):
     
     try:
         cursor = conn.cursor()
-        query = f"SELECT * FROM livros WHERE {pesquisa} = %s;"
+        query = f"SELECT * FROM livros WHERE {pesquisa} = %s ORDER BY id_livro ASC;"
         cursor.execute(query, (autor2,))
         livros = cursor.fetchall()
         

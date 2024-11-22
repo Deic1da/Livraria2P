@@ -54,7 +54,7 @@ def listar_clientes():
     
     try:
         cursor = conn.cursor()
-        query = "SELECT * FROM clientes;"
+        query = "SELECT * FROM clientes ORDER BY id_cliente ASC;"
         cursor.execute(query)
         clientes = cursor.fetchall()
         

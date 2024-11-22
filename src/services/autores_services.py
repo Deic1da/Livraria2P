@@ -29,7 +29,7 @@ def listar_autores():
     
     try:
         cursor = conn.cursor()
-        query = "SELECT * FROM autores;"
+        query = "SELECT * FROM autores ORDER BY id_autor ASC;"
         cursor.execute(query)
         autores = cursor.fetchall()
         

@@ -29,7 +29,7 @@ def listar_categorias():
     
     try:
         cursor = conn.cursor()
-        query = "SELECT * FROM categorias;"
+        query = "SELECT * FROM categorias ORDER BY id_categoria ASC;"
         cursor.execute(query)
         categorias = cursor.fetchall()
         

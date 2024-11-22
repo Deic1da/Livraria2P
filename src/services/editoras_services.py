@@ -30,7 +30,7 @@ def listar_editoras():
     
     try:
         cursor = conn.cursor()
-        query = "SELECT * FROM editoras;"
+        query = "SELECT * FROM editoras ORDER BY id_editora ASC;"
         cursor.execute(query)
         editoras = cursor.fetchall()
         
