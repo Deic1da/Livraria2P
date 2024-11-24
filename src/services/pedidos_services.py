@@ -1,4 +1,5 @@
 from services import *
+from services.clientes_services import procurar_clientes
 import time
 import os
 from services.database import criar_conexao
@@ -39,7 +40,8 @@ def vender_livro(produto, funcionario):
             
             if quantidade_vendida <= livro[5]:
                 if quantidade_vendida >= 0:
-                    listar_clientes()
+                    dado = input("Digite o CPF do cliente: ")
+                    procurar_clientes("cpf",dado)
                     id_cliente = int(input("Digite o ID do cliente: "))
                     
                     id_funcionario = funcionario
@@ -90,34 +92,32 @@ def listar_pedidos():
     
     try:
         cursor = conn.cursor()
-        
-        query = "SELECT * FROM pedidos;"
+        query = """
+        SELECT 
+            p.id_pedido, 
+            c.nome AS cliente, 
+            l.nome_livro AS livro, 
+            p.quantidade, 
+            p.preco_pedido, 
+            f.nome AS funcionario, 
+            p.data_pedido
+        FROM pedidos p
+        INNER JOIN clientes c ON p.id_cliente = c.id_cliente
+        INNER JOIN livros l ON p.id_livro = l.id_livro
+        INNER JOIN funcionarios f ON p.id_funcionario = f.id_funcionario;
+        """
         cursor.execute(query)
         pedidos = cursor.fetchall()
-        
+
         if pedidos:
             print("\033[92mPedidos cadastrados:\033[0m")
-            print("\033[96mID do Pedido | Cliente              | Livro                    | Quantidade | Preço Total    | Funcionário          | Data\033[0m")
+            print("\033[96mID do Pedido | Cliente              | Livro                          | Quantidade | Preço Total    | Funcionário          | Data\033[0m")
             print("-" * 170)
 
             for pedido in pedidos:
-            
-                query_cliente = "SELECT nome FROM clientes WHERE id_cliente = %s;"
-                cursor.execute(query_cliente, (pedido[1],))
-                cliente = cursor.fetchone()[0]
+                print(f"\033[95m{pedido[0]:<12}\033[0m | \033[94m{pedido[1]:<20}\033[0m | \033[93m{pedido[2]:<30}\033[0m | "
+                      f"{pedido[3]:<10} | \033[92mR${pedido[4]:<12.2f}\033[0m | \033[96m{pedido[5]:<20}\033[0m | {pedido[6]}")
 
-                query_livro = "SELECT nome_livro FROM livros WHERE id_livro = %s;"
-                cursor.execute(query_livro, (pedido[2],))
-                livro = cursor.fetchone()[0]
-                
-                query_funcionario = "SELECT nome FROM funcionarios WHERE id_funcionario = %s;"
-                cursor.execute(query_funcionario, (pedido[5],))
-                funcionario = cursor.fetchone()[0]
-
-                
-                print(f"\033[95m{pedido[0]:<12}\033[0m | \033[94m{cliente:<20}\033[0m | \033[93m{livro:<24}\033[0m | "
-                      f"{pedido[3]:<10} | \033[92mR${pedido[4]:<12.2f}\033[0m | \033[96m{funcionario:<20}\033[0m | {pedido[6]}")
-                
             input("Aperte qualquer botão para continuar...")
         else:
             print("\033[93mNenhum pedido encontrado.\033[0m")

@@ -46,6 +46,7 @@ def cadastrar_cliente():
         cursor.close()
         conn.close()
 
+
 def listar_clientes():
     conn = criar_conexao()
     if conn is None:
@@ -65,6 +66,32 @@ def listar_clientes():
             for cliente in clientes:
                 # Formatação com espaçamento
                 print(f"\033[92m{cliente[0]:<5}\033[0m" + f" {cliente[1]:<25} {cliente[4]}")
+        else:
+            print("\033[93mNenhum cliente encontrado.\033[0m")
+    except Exception as e:
+        print(f"\033[91mErro ao listar clientes: {e}\033[0m")
+    finally:
+        cursor.close()
+        conn.close()
+
+
+def procurar_clientes(comparador,dado):
+    conn = criar_conexao()
+    if conn is None:
+        print("\033[91mErro na conexão com o banco de dados.\033[0m")
+        return
+    
+    try:
+        cursor = conn.cursor()
+        query = f"SELECT * FROM clientes c where c.{comparador} like %s;"
+        cursor.execute(query, (dado,))
+        clientes = cursor.fetchone()
+        
+        if clientes:
+            print("\033[96mClientes cadastrados:\033[0m")
+            print("\033[94mID\033[0m" + " " * 4 + "\033[94mNome\033[0m" + " " * 22 + "\033[94mCPF\033[0m")
+            print("-" * 60)
+            print(f"\033[92m{clientes[0]:<5}\033[0m" + f" {clientes[1]:<25} {clientes[4]}")
         else:
             print("\033[93mNenhum cliente encontrado.\033[0m")
     except Exception as e:
