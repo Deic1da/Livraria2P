@@ -85,7 +85,12 @@ def listar_livros():
     
     try:
         cursor = conn.cursor()
-        query = "SELECT * FROM livros ORDER BY id_livro ASC;"
+        query = """SELECT l.id_livro, l.nome_livro, c.nome_Categoria AS categoria, a.nome_Autor AS autor, e.nome_Editora AS editora, l.estoque, l.preco
+        FROM livros l
+        JOIN categorias c ON l.id_Categoria = c.id_Categoria
+        JOIN autores a ON l.id_Autor = a.id_Autor
+        JOIN editoras e ON l.id_Editora = e.id_Editora
+        ORDER BY l.id_livro ASC;"""
         cursor.execute(query)
         livros = cursor.fetchall()
         
@@ -94,19 +99,7 @@ def listar_livros():
             print(f"{'ID':<5} | {'Título':<50} | {'Categoria':<30} | {'Autor':<30} | {'Editora':<30} | {'Estoque':<10} | {'Preço':<15}")
             print("-" * 180)
             for livro in livros:
-                query_categoria = "SELECT nome_Categoria FROM categorias WHERE id_Categoria = %s;"
-                cursor.execute(query_categoria, (livro[2],))
-                categoria = cursor.fetchone()[0]
-
-                query_autor = "SELECT nome_Autor FROM autores WHERE id_Autor = %s;"
-                cursor.execute(query_autor, (livro[3],))
-                autor = cursor.fetchone()[0]
-
-                query_editora = "SELECT nome_Editora FROM editoras WHERE id_Editora = %s;"
-                cursor.execute(query_editora, (livro[4],))
-                editora = cursor.fetchone()[0]
-
-                print(f"\033[92m{livro[0]:<5}\033[0m | {livro[1]:<50} | \033[93m{categoria:<30}\033[0m | \033[94m{autor:<30}\033[0m | \033[95m{editora:<30}\033[0m | {livro[5]:<10} | R${livro[6]:<15}")
+                print(f"\033[92m{livro[0]:<5}\033[0m | {livro[1]:<50} | \033[93m{livro[2]:<30}\033[0m | \033[94m{livro[3]:<30}\033[0m | \033[95m{livro[4]:<30}\033[0m | {livro[5]:<10} | R${livro[6]:<15}")
         else:
             print("\033[93mNenhum livro encontrado.\033[0m")
     except Exception as e:
@@ -114,6 +107,7 @@ def listar_livros():
     finally:
         cursor.close()
         conn.close()
+
 
 
 def listar_livros_personalisado(autor2, pesquisa):
@@ -124,7 +118,13 @@ def listar_livros_personalisado(autor2, pesquisa):
     
     try:
         cursor = conn.cursor()
-        query = f"SELECT * FROM livros WHERE {pesquisa} = %s ORDER BY id_livro ASC;"
+        query = f"""SELECT l.id_livro, l.nome_livro, c.nome_Categoria AS categoria, a.nome_Autor AS autor, e.nome_Editora AS editora, l.estoque, l.preco
+        FROM livros l
+        JOIN categorias c ON l.id_Categoria = c.id_Categoria
+        JOIN autores a ON l.id_Autor = a.id_Autor
+        JOIN editoras e ON l.id_Editora = e.id_Editora
+        WHERE l.{pesquisa} = %s
+        ORDER BY l.id_livro ASC;"""
         cursor.execute(query, (autor2,))
         livros = cursor.fetchall()
         
@@ -134,19 +134,7 @@ def listar_livros_personalisado(autor2, pesquisa):
             print(f"{'ID':<5} | {'Título':<50} | {'Categoria':<30} | {'Autor':<30} | {'Editora':<30} | {'Estoque':<10} | {'Preço':<15}")
             print("-" * 180) 
             for livro in livros:
-                query_categoria = "SELECT nome_Categoria FROM categorias WHERE id_Categoria = %s;"
-                cursor.execute(query_categoria, (livro[2],))
-                categoria = cursor.fetchone()[0]
-
-                query_autor = "SELECT nome_Autor FROM autores WHERE id_Autor = %s;"
-                cursor.execute(query_autor, (livro[3],))
-                autor = cursor.fetchone()[0]
-
-                query_editora = "SELECT nome_Editora FROM editoras WHERE id_Editora = %s;"
-                cursor.execute(query_editora, (livro[4],))
-                editora = cursor.fetchone()[0]
-
-                print(f"\033[92m{livro[0]:<5}\033[0m | {livro[1]:<50} | \033[93m{categoria:<30}\033[0m | \033[94m{autor:<30}\033[0m | \033[95m{editora:<30}\033[0m | {livro[5]:<10} | R${livro[6]:<15}")
+                print(f"\033[92m{livro[0]:<5}\033[0m | {livro[1]:<50} | \033[93m{livro[2]:<30}\033[0m | \033[94m{livro[3]:<30}\033[0m | \033[95m{livro[4]:<30}\033[0m | {livro[5]:<10} | R${livro[6]:<15}")
         else:
             print("\033[93mNenhum livro encontrado.\033[0m")
     except Exception as e:
@@ -154,6 +142,7 @@ def listar_livros_personalisado(autor2, pesquisa):
     finally:
         cursor.close()
         conn.close()
+
 
 def procurar_por_nome(pesquisa):
     conn = criar_conexao()
@@ -163,28 +152,26 @@ def procurar_por_nome(pesquisa):
     
     try:
         cursor = conn.cursor()
-        query = f"SELECT * FROM livros l WHERE l.nome_livro ILIKE %s ORDER BY id_livro ASC;"
-        cursor.execute(query, ('%'+pesquisa+'%',))
+        query = """SELECT l.id_livro, l.nome_livro, c.nome_Categoria AS categoria, a.nome_Autor AS autor, e.nome_Editora AS editora, l.estoque, l.preco
+        FROM livros l
+        JOIN categorias c ON l.id_Categoria = c.id_Categoria
+        JOIN autores a ON l.id_Autor = a.id_Autor
+        JOIN editoras e ON l.id_Editora = e.id_Editora
+        WHERE l.nome_livro ILIKE %s
+        ORDER BY l.id_livro ASC;"""
+        cursor.execute(query, ('%' + pesquisa + '%',))
         livros = cursor.fetchall()
 
-        for livro in livros:
-                query_categoria = "SELECT nome_Categoria FROM categorias WHERE id_Categoria = %s;"
-                cursor.execute(query_categoria, (livro[2],))
-                categoria = cursor.fetchone()[0]
-
-                query_autor = "SELECT nome_Autor FROM autores WHERE id_Autor = %s;"
-                cursor.execute(query_autor, (livro[3],))
-                autor = cursor.fetchone()[0]
-
-                query_editora = "SELECT nome_Editora FROM editoras WHERE id_Editora = %s;"
-                cursor.execute(query_editora, (livro[4],))
-                editora = cursor.fetchone()[0]
-
-                print(f"\033[92m{livro[0]:<5}\033[0m | {livro[1]:<50} | \033[93m{categoria:<30}\033[0m | \033[94m{autor:<30}\033[0m | \033[95m{editora:<30}\033[0m | {livro[5]:<10} | R${livro[6]:<15}")
- 
+        if livros:
+            print("\033[96mResultados da pesquisa:\033[0m")
+            print(f"{'ID':<5} | {'Título':<50} | {'Categoria':<30} | {'Autor':<30} | {'Editora':<30} | {'Estoque':<10} | {'Preço':<15}")
+            print("-" * 180)
+            for livro in livros:
+                print(f"\033[92m{livro[0]:<5}\033[0m | {livro[1]:<50} | \033[93m{livro[2]:<30}\033[0m | \033[94m{livro[3]:<30}\033[0m | \033[95m{livro[4]:<30}\033[0m | {livro[5]:<10} | R${livro[6]:<15}")
+        else:
+            print("\033[93mNenhum livro encontrado com esse nome.\033[0m")
     except Exception as e:
         print(f"\033[91mErro ao listar: {e}\033[0m")
-        time.sleep(2)
     finally:
         cursor.close()
         conn.close()
