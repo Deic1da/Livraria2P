@@ -1,0 +1,154 @@
+CREATE TABLE autores (
+    id_autor SERIAL PRIMARY KEY,
+    nome_autor VARCHAR(500) NOT NULL UNIQUE
+);
+
+
+CREATE TABLE editoras (
+    id_editora SERIAL PRIMARY KEY,
+    nome_editora VARCHAR(1000) NOT NULL UNIQUE,
+    endereco VARCHAR(2000) NOT NULL
+);
+
+
+CREATE TABLE categorias (
+    id_categoria SERIAL PRIMARY KEY,
+    nome_categoria VARCHAR(200) NOT NULL UNIQUE
+);
+
+
+CREATE TABLE clientes (
+    id_cliente SERIAL PRIMARY KEY,
+    nome VARCHAR(500) NOT NULL,
+    email VARCHAR(1000) NOT NULL UNIQUE,
+    endereco VARCHAR(2000) NOT NULL,
+    cpf CHAR(11) NOT NULL UNIQUE
+);
+
+
+CREATE TABLE funcionarios (
+    id_funcionario SERIAL PRIMARY KEY,
+    nome VARCHAR(500) NOT NULL,
+    email VARCHAR(1000) NOT NULL UNIQUE,
+    senha bytea NOT NULL
+);
+
+
+CREATE TABLE livros (
+    id_livro SERIAL PRIMARY KEY,
+    nome_livro VARCHAR(1000) NOT NULL,
+    id_categoria INT REFERENCES categorias(id_categoria),
+    id_autor INT REFERENCES autores(id_autor),
+    id_editora INT REFERENCES editoras(id_editora),
+    estoque INT NOT NULL,
+    preco NUMERIC(10, 2) NOT NULL
+);
+
+
+CREATE TABLE pedidos (
+    id_pedido SERIAL PRIMARY KEY,
+    id_cliente INT REFERENCES clientes(id_cliente),
+    id_livro INT REFERENCES livros(id_livro),
+    quantidade INT NOT NULL,
+    preco_pedido NUMERIC(10, 2) NOT NULL,
+    id_funcionario INT REFERENCES funcionarios(id_funcionario),
+    data_pedido DATE NULL
+);
+
+INSERT INTO autores (nome_autor) VALUES
+('J.K. Rowling'),
+('George Orwell'),
+('J.R.R. Tolkien'),
+('Stephen King'),
+('Agatha Christie'),
+('Isaac Asimov'),
+('Arthur Conan Doyle'),
+('Jane Austen'),
+('Charles Dickens'),
+('Mark Twain'),
+('Ernest Hemingway'),
+('F. Scott Fitzgerald'),
+('H.G. Wells'),
+('Leo Tolstoy'),
+('Fyodor Dostoevsky'),
+('Gabriel Garcia Marquez'),
+('Haruki Murakami'),
+('James Joyce'),
+('Victor Hugo'),
+('Homer');
+
+
+
+INSERT INTO categorias (nome_categoria) VALUES
+('Ficção'),
+('Mistério'),
+('Fantasia'),
+('Terror'),
+('Romance'),
+('Ciência Ficcional'),
+('Clássico'),
+('Histórico'),
+('Aventura'),
+('Biografia');
+
+
+
+INSERT INTO editoras (nome_editora, endereco) VALUES
+('Penguin Random House', '123 Fictional St, London, UK'),
+('HarperCollins', '456 Imaginary Ave, New York, USA'),
+('Houghton Mifflin Harcourt', '789 Fantasy Rd, Boston, USA'),
+('Macmillan Publishers', '321 Detective Blvd, London, UK'),
+('Simon & Schuster', '654 Horror Lane, New York, USA'),
+('Bloomsbury Publishing', '987 Novel Way, London, UK'),
+('Scribner', '111 Literary Ct, New York, USA'),
+('Vintage Books', '222 Classic Circle, London, UK'),
+('Oxford University Press', '333 Scholar St, Oxford, UK'),
+('Cambridge University Press', '444 University Way, Cambridge, UK');
+
+
+
+INSERT INTO livros (nome_livro, id_categoria, id_autor, id_editora, estoque, preco) VALUES
+('Harry Potter e a Pedra Filosofal', 3, 1, 6, 50, 29.99),
+('1984', 1, 2, 1, 30, 19.99),
+('O Senhor dos Anéis', 3, 3, 3, 40, 39.99),
+('O Iluminado', 4, 4, 5, 25, 24.99),
+('Assassinato no Expresso Oriente', 2, 5, 4, 20, 19.99),
+('Fundação', 6, 6, 2, 30, 21.99),
+('O Cão dos Baskervilles', 2, 7, 1, 15, 17.99),
+('Orgulho e Preconceito', 5, 8, 1, 35, 22.99),
+('Oliver Twist', 7, 9, 9, 30, 18.99),
+('As Aventuras de Tom Sawyer', 9, 10, 7, 20, 15.99),
+('O Velho e o Mar', 7, 11, 6, 25, 19.99),
+('O Grande Gatsby', 7, 12, 7, 40, 23.99),
+('A Máquina do Tempo', 6, 13, 1, 20, 14.99),
+('Guerra e Paz', 8, 14, 9, 10, 32.99),
+('Crime e Castigo', 7, 15, 10, 15, 19.99),
+('Cem Anos de Solidão', 7, 16, 9, 25, 24.99),
+('Norwegian Wood', 5, 17, 2, 30, 19.99),
+('Ulisses', 7, 18, 8, 12, 34.99),
+('Os Miseráveis', 8, 19, 9, 18, 29.99),
+('Ilíada', 9, 20, 10, 25, 27.99),
+('Harry Potter e a Câmara Secreta', 3, 1, 6, 50, 29.99),
+('Harry Potter e o Prisioneiro de Azkaban', 3, 1, 6, 50, 29.99),
+('Harry Potter e o Cálice de Fogo', 3, 1, 6, 50, 29.99),
+('Harry Potter e a Ordem da Fênix', 3, 1, 6, 50, 29.99),
+('Harry Potter e o Enigma do Príncipe', 3, 1, 6, 50, 29.99),
+('Harry Potter e as Relíquias da Morte', 3, 1, 6, 50, 29.99),
+('O Hobbit', 3, 3, 3, 40, 25.99),
+('Carrie, a Estranha', 4, 4, 5, 25, 19.99),
+('O Assassinato de Roger Ackroyd', 2, 5, 4, 20, 18.99),
+('Eu, Robô', 6, 6, 2, 30, 21.99);
+
+
+
+INSERT INTO clientes (nome, email, endereco, cpf) VALUES
+('Maria da Silva', 'maria.silva@email.com', 'Rua A, 123, Centro', '12345678901'),
+('João Souza', 'joao.souza@email.com', 'Rua B, 456, Centro', '23456789012'),
+('Ana Pereira', 'ana.pereira@email.com', 'Rua C, 789, Centro', '34567890123'),
+('Carlos Alberto', 'carlos.alberto@email.com', 'Rua D, 159, Centro', '45678901234'),
+('Fernanda Costa', 'fernanda.costa@email.com', 'Rua E, 753, Centro', '56789012345'),
+('Lucas Mendes', 'lucas.mendes@email.com', 'Rua F, 159, Centro', '67890123456'),
+('Juliana Lima', 'juliana.lima@email.com', 'Rua G, 951, Centro', '78901234567'),
+('Ricardo Gomes', 'ricardo.gomes@email.com', 'Rua H, 357, Centro', '89012345678'),
+('Tatiane Martins', 'tatiane.martins@email.com', 'Rua I, 852, Centro', '90123456789'),
+('Eduardo Ferreira', 'eduardo.ferreira@email.com', 'Rua J, 246, Centro', '01234567890');
